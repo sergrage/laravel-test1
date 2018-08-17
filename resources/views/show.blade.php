@@ -55,7 +55,7 @@
             }
 
             .links > a {
-                
+
                 padding: 0 25px;
                 font-size: 12px;
                 font-weight: 600;
@@ -81,52 +81,17 @@
     </head>
     <body>
         <div class="flex-center position-ref">
-                        <div class="container">
-                <div class="content">
-                    <div class="title m-b-md">
-                        Add Article
-                    </div>
-                </div>
-                <hr>
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
-                       <form action="" method="POST" accept-charset="utf-8">
-                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter title">
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputPassword1">Article text</label>
-                                <textarea type="text" class="form-control" id="exampleInputPassword1" placeholder="Content"></textarea>
-                              </div>
-                              <button type="submit" class="btn btn-primary">Submit</button>
-                       </form>
-                    </div>
-                    <div class="col-md-6">
-                        
-
-                        @forelse ($articles as $article)
-                            <article>
-                                
-                                <h3> {{ $article->title }} </h3>
-                                <p>  {{ $article->body }} </p>
-                                <p>  {{ $article->published_at }}</p>
-
-                                <form action="" method="get">
-                                    <button type="submit" class="btn btn-info">Show all</button>
-                                </form>
-                                
-                            </article>
-                        @empty
-                            <h3>No articles</h3>
-                        @endforelse
-                        <hr>
-                    </div>
+                    <h3> {{ $article->title }} </h3>
+                    <article>
+                        <p>  {{ $article->body }} </p>
+                        <p>  {{ $article->published_at }}</p>
+                    </article>
+                    <hr>
+                    <a href="{{ URL::previous() }}" class="btn btn-danger">Back</a>
                 </div>
-
-            </div>
-
-            
+             </div>
         </div>
     </body>
 </html>

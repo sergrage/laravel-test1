@@ -23,7 +23,7 @@ class IndexController extends Controller
 
     public function create()
     {
-        
+
     }
 
 
@@ -55,7 +55,14 @@ class IndexController extends Controller
 
     public function update(NewArticleRequest $request, $id)
     {
-        
+        $article = Article::findOrFail($id);
+        $article->update([
+            'title' => $request['title'],
+            'body' => $request['body'],
+            'published_at' => $article->published_at,
+            ]);
+
+        return redirect('/articles');
     }
 
 
@@ -66,4 +73,4 @@ class IndexController extends Controller
 }
 
 
- 
+

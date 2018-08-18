@@ -9,26 +9,14 @@
 <hr>
 <div class="row">
     <div class="col-md-6">
-        
+
         {!! Form::open(['method' => 'POST', 'action' => 'IndexController@store']) !!}
-        <div class="form-group">
-            {!! Form::label('title', 'Article Title') !!}
-            {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'Enter-title']) !!}
-        </div>
-        <div class="form-group">    
-            {!! Form::label('body', 'Article body') !!}
-            {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Enter-content']) !!}
-        </div>    
-        <button type="submit" class="btn btn-primary">Submit</button>
+
+        @include('partials._form', ['submitBtn' => 'Add Article'])
+
         {!! Form::close() !!}
 
-        @if ($errors->any())
-            <ul class="alert alert-danger mt-lg-4">
-                @foreach($errors->all() as $e)
-                <li> {{ $e }} </li>
-                @endforeach
-            </ul>
-        @endif
+        @include('errors/list')
 
     </div>
     <div class="col-md-6">
@@ -38,7 +26,7 @@
                 <h3> {{ $article->title }} </h3>
                 <p>  {{ $article->body }} </p>
                 <p>  Published {{ $article->publishedAtForHumans() }}</p>
-                <a href=" {{action ('IndexController@show', [$article->id])}} " class="btn btn-info">Show all</a>
+                <a href=" {{action ('IndexController@show', [$article->id])}} " class="btn btn-info">Show</a>
                 <a href=" {{action ('IndexController@edit', [$article->id])}} " class="btn btn-warning">Edit</a>
                 <a href=" {{action ('IndexController@show', [$article->id])}} " class="btn btn-danger">Delete</a>
                 <hr>
@@ -46,7 +34,7 @@
         @empty
             <h3>No articles</h3>
         @endforelse
-        
+
     </div>
 </div>
 @endsection

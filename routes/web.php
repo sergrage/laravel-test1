@@ -17,3 +17,7 @@ Route::resource('/articles', 'IndexController');
 
 //Route::get('/{id}', 'IndexController@show');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

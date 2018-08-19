@@ -1,6 +1,9 @@
 @extends('layout')
 
 @section('content')
+
+@include('partials._nav')
+
 <div class="content">
     <div class="title m-b-md">
         Add Article

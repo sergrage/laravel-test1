@@ -1,5 +1,7 @@
-@extends('layout')
+@extends('layouts.app')
+
 @section('content')
+@include('partials._nav')
     <div class="row mt-lg-5">
     <div class="col-md-12">
         {!! Form::model($article, ['method' => 'PATCH', 'action' => ['IndexController@update', $article->id]]) !!}

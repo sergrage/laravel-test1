@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Article;
 use Illuminate\Support\Carbon;
+use Illuminate\Database\Eloquent\Collection;
+
+use Illuminate\Support\Facades\Auth;
 
 
 use App\Http\Requests\NewArticleRequest;
@@ -13,9 +16,15 @@ use App\Http\Requests\NewArticleRequest;
 class IndexController extends Controller
 {
 
+    public function __construct()
+    {
+        //$this->middleware('auth', ['only' => 'store']);
+        $this->middleware('auth', ['except' => 'index']);
+    }
+
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::latest()->get();
 
         return view('welcome', compact('articles'));
     }
@@ -29,10 +38,12 @@ class IndexController extends Controller
 
     public function store(NewArticleRequest $request)
     {
+
         $article = Article::create([
             'title' => $request['title'],
             'body' => $request['body'],
             'published_at' => Carbon::now(),
+            'user_id' => Auth::user()->id,
         ]);
 
         return redirect('/articles');
@@ -42,6 +53,8 @@ class IndexController extends Controller
     public function show($id)
     {
         $article = Article::findOrFail($id);
+        $article->increment('view');
+
         return view('show', compact('article'));
     }
 

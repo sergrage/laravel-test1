@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -28,7 +28,8 @@
             <article class="pb-lg-5">
                 <h3> {{ $article->title }} </h3>
                 <p>  {{ $article->body }} </p>
-                <p>  Published {{ $article->publishedAtForHumans() }}</p>
+                <p> Published  <span class="badge badge-light">{{ $article->publishedAtForHumans() }}</span> by <span class="badge badge-info"> {{ $article->user->name }} </span></p>
+                <p>View: <span> {{ $article->view }} </span></p>
                 <a href=" {{action ('IndexController@show', [$article->id])}} " class="btn btn-info">Show</a>
                 <a href=" {{action ('IndexController@edit', [$article->id])}} " class="btn btn-warning">Edit</a>
                 <a href=" {{action ('IndexController@show', [$article->id])}} " class="btn btn-danger">Delete</a>

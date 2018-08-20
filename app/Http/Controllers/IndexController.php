@@ -50,25 +50,25 @@ class IndexController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Article $article)
     {
-        $article = Article::findOrFail($id);
+        //$article = Article::findOrFail($id);
         $article->increment('view');
 
         return view('show', compact('article'));
     }
 
 
-    public function edit($id)
+    public function edit(Article $article)
     {
-        $article = Article::findOrFail($id);
+        //$article = Article::findOrFail($id);
         return view('edit', compact('article'));
     }
 
 
-    public function update(NewArticleRequest $request, $id)
+    public function update(NewArticleRequest $request, Article $article)
     {
-        $article = Article::findOrFail($id);
+       //$article = Article::findOrFail($id);
         $article->update([
             'title' => $request['title'],
             'body' => $request['body'],
@@ -79,7 +79,7 @@ class IndexController extends Controller
     }
 
 
-    public function destroy($id)
+    public function destroy(Article $article)
     {
         //
     }

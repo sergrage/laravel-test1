@@ -34,14 +34,19 @@
                 <p>View: <span> {{ $article->view }} </span></p>
                 <a href=" {{action ('IndexController@show', [$article->id])}} " class="btn btn-info">Show</a>
                 <a href=" {{action ('IndexController@edit', [$article->id])}} " class="btn btn-warning">Edit</a>
-                <a href=" {{action ('IndexController@show', [$article->id])}} " class="btn btn-danger">Delete</a>
+
+                {!! Form::model($article, ['method' => 'DELETE','files' => true, 'action' => ['IndexController@destroy', $article->id], 'class' => 'd-inline']) !!}
+                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                {!! Form::close() !!}
+
                 <hr>
             </article>
         @empty
             <h3>No articles</h3>
         @endforelse
-
+            {{ $articles->links() }}
     </div>
+
 </div>
 @endsection
 

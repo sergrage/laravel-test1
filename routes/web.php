@@ -1,12 +1,12 @@
 <?php
 
 
-//Route::get('/', 'IndexController@index');
+//Route::get('/articles/{slug}', 'IndexController@show');
 //Route::get('/{id}', 'IndexController@show');
 
 Route::resource('/articles', 'IndexController');
 
-
+Route::post('image/upload', 'ImageController@upload')->name('image.upload');
 
 
 Auth::routes();

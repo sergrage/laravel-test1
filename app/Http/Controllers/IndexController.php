@@ -24,7 +24,8 @@ class IndexController extends Controller
 
     public function index()
     {
-        $articles = Article::latest()->get();
+        // $articles = Article::latest()->get()->paginate(5);
+        $articles = Article::orderBy('id', 'desc')->paginate(3);
 
         return view('welcome', compact('articles'));
     }
@@ -83,7 +84,8 @@ class IndexController extends Controller
 
     public function destroy(Article $article)
     {
-        //
+        $article->delete();
+        return redirect('/articles');
     }
 }
 

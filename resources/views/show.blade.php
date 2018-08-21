@@ -10,6 +10,6 @@
             <hr>
         </article>
 
-        <a href="{{ URL::previous() }}" class="btn btn-danger">Back</a>
+        <a href="{{ route('articles.index') }}" class="btn btn-danger">Back</a>
     </div>
 @endsection

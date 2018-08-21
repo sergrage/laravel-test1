@@ -12,14 +12,14 @@
 
 
         <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{{ mix('js/app.js') }}" defer></script>
 
         <!-- Fonts -->
         <!-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"> -->
 
         <!-- Styles -->
 
-        <link rel="stylesheet" type="text/css" href="/css/app.css">
+        <link rel="stylesheet" type="text/css" href="{{ mix('/css/app.css') }}">
 
         <style>
             html, body {
@@ -73,6 +73,7 @@
                 font-weight: 600;
             }
         </style>
+        
     </head>
     <body>
         <div class="flex-center position-ref">
@@ -82,5 +83,9 @@
 
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+        </script>
     </body>
 </html>

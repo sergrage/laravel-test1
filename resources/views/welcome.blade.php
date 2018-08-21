@@ -21,6 +21,8 @@
 
         @include('errors/list')
 
+        @include ('flash::message')
+
     </div>
     <div class="col-md-6">
 

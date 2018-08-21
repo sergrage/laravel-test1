@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 
-use App\Http\Requests\NewArticleRequest;
+use App\Http\Requests\ArticleRequest;
 
 
 class IndexController extends Controller
@@ -36,7 +36,7 @@ class IndexController extends Controller
     }
 
 
-    public function store(NewArticleRequest $request)
+    public function store(ArticleRequest $request)
     {
 
         $article = Article::create([
@@ -45,6 +45,8 @@ class IndexController extends Controller
             'published_at' => Carbon::now(),
             'user_id' => Auth::user()->id,
         ]);
+
+        flash('Article has been created')->success();
 
         return redirect('/articles');
     }
@@ -66,7 +68,7 @@ class IndexController extends Controller
     }
 
 
-    public function update(NewArticleRequest $request, Article $article)
+    public function update(ArticleRequest $request, Article $article)
     {
        //$article = Article::findOrFail($id);
         $article->update([

@@ -2,10 +2,11 @@
 
 
 //Route::get('/', 'IndexController@index');
+//Route::get('/{id}', 'IndexController@show');
 
 Route::resource('/articles', 'IndexController');
 
-//Route::get('/{id}', 'IndexController@show');
+
 
 
 Auth::routes();

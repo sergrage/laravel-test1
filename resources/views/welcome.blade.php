@@ -29,6 +29,9 @@
         @forelse ($articles as $article)
             <article class="pb-lg-5">
                 <h3> {{ $article->title }} </h3>
+                @isset ($path)
+                <img class="img-fluid" src="{{ asset('/storage/' . $path) }}" alt="">
+                @endisset
                 <p>  {{ $article->body }} </p>
                 <p> Published  <span class="badge badge-light">{{ $article->publishedAtForHumans() }}</span> by <span class="badge badge-info"> {{ $article->user->name }} </span></p>
                 <p>View: <span> {{ $article->view }} </span></p>

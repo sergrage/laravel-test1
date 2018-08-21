@@ -7,10 +7,10 @@
     {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Enter-content']) !!}
 </div>
 <div class="form-group">
-{!! Form::file('image') !!}	
+    {!! Form::file('image') !!}
 </div>
 <div class="form-group">
-{!! Form::submit($submitBtn, ['class' => 'btn btn-primary']) !!}
+    {!! Form::submit($submitBtn, ['class' => 'btn btn-primary']) !!}
 </div>
 
 

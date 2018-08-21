@@ -11,22 +11,22 @@ use App\User;
 class Article extends Model
 {
 
-    use Sluggable;
+   // use Sluggable;
 
 
-    protected $fillable = ['title', 'body', 'published_at', 'user_id'];
+    protected $fillable = ['title', 'body', 'published_at', 'user_id', 'image'];
 
 // Чтобы своя дата 'published_at' работала как экземпляр Carbon.
     protected $dates = ['published_at'];
 
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
-    }
+    // public function sluggable()
+    // {
+    //     return [
+    //         'slug' => [
+    //             'source' => 'title'
+    //         ]
+    //     ];
+    // }
 
 
     public function publishedAtForHumans()

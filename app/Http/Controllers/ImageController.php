@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
-    public function FunctionName($value='')
+    public function upload(Request $request)
     {
-    	# code...
+        //  type="file"  name="image"   имя_папки    имя диска
+        $path = $request->file('image')->store('uploads', 'public');
+
+        return view('welcom', compact('path'));
     }
 }

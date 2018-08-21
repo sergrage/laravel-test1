@@ -37,14 +37,16 @@ class IndexController extends Controller
     }
 
 
-    public function store(ArticleRequest $request)
+    public function store(Request $request)
     {
+        dd($request);
 
         $article = Article::create([
             'title' => $request['title'],
             'body' => $request['body'],
             'published_at' => Carbon::now(),
             'user_id' => Auth::user()->id,
+            'image' => $this->upload(),
         ]);
 
         flash('Article has been created')->success();
@@ -86,6 +88,14 @@ class IndexController extends Controller
     {
         $article->delete();
         return redirect('/articles');
+    }
+
+    public function upload(Request $request)
+    {
+        //  type="file"  name="image"   имя_папки    имя диска
+        $path = $request->file('image')->store('uploads', 'public');
+
+        return $path;
     }
 }
 

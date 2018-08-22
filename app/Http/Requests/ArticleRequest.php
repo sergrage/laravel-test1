@@ -17,7 +17,7 @@ class ArticleRequest extends FormRequest
         return [
             'title' => 'required|min:3',
             'body' => 'required|min:50',
-            'image' => 'image',
+            'image' => 'nullable|image',
         ];
     }
 }

@@ -4,7 +4,7 @@
 </div>
 <div class="form-group">
     {!! Form::label('body', 'Article body') !!}
-    {!! Form::textarea('body', null, ['class' => 'form-control', 'placeholder' => 'Enter-content']) !!}
+    {!! Form::textarea('body', null, ['class' => 'form-control ck-editor__editable', 'placeholder' => 'Enter-content', 'id' => 'editor', 'rows' => '10']) !!}
 </div>
 <div class="form-group">
     {!! Form::file('image') !!}

@@ -22,10 +22,11 @@ class IndexController extends Controller
         $this->middleware('auth', ['except' => 'index']);
     }
 
+
     public function index()
     {
         // $articles = Article::latest()->get()->paginate(5);
-        $articles = Article::orderBy('id', 'desc')->paginate(3);
+        $articles = Article::orderBy('published_at', 'desc')->paginate(3);
 
         return view('welcome', compact('articles'));
     }
@@ -37,17 +38,26 @@ class IndexController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
-        dd($request);
-
+        //  type="file"  name="image"   имя_папки    имя диска
+        if($request['image']){
+            $path = $request->file('image')->store('uploads', 'public');
+        } else {
+            $path = '';
+        }
+        
         $article = Article::create([
             'title' => $request['title'],
             'body' => $request['body'],
             'published_at' => Carbon::now(),
             'user_id' => Auth::user()->id,
-            'image' => $this->upload(),
+            'image' => $path,
         ]);
+
+        if($article->haveImage()){
+            $article->resizeImage();    
+        }
 
         flash('Article has been created')->success();
 
@@ -89,15 +99,4 @@ class IndexController extends Controller
         $article->delete();
         return redirect('/articles');
     }
-
-    public function upload(Request $request)
-    {
-        //  type="file"  name="image"   имя_папки    имя диска
-        $path = $request->file('image')->store('uploads', 'public');
-
-        return $path;
-    }
 }
-
-
-

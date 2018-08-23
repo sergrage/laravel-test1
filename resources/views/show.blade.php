@@ -10,6 +10,12 @@
                 @endisset
             <p>  {{ $article->body }} </p>
             <p> Published  <span class="badge badge-light">{{ $article->publishedAtForHumans() }}</span> by <span class="badge badge-info"> {{ $article->user->name }} </span></p>
+            
+            @forelse($article->tags as $tag)
+                <span class="badge badge-secondary">{{ $tag->name }}</span>
+            @empty
+                <span class="badge badge-secondary">No tags for this article</span>
+            @endforelse
             <hr>
         </article>
 

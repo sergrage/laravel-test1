@@ -42,6 +42,14 @@
                 {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                 {!! Form::close() !!}
 
+                <div>
+                    @forelse($article->tags as $tag)
+                    <span class="badge badge-secondary">{{ $tag->name }}</span>
+                    @empty
+                        <span class="badge badge-secondary">No tags for this article</span>
+                    @endforelse
+                </div>
+                
                 <hr>
             </article>
         @empty
@@ -52,4 +60,3 @@
 
 </div>
 @endsection
-

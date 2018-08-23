@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Article;
+use App\Tag;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -26,9 +27,10 @@ class IndexController extends Controller
     public function index()
     {
         // $articles = Article::latest()->get()->paginate(5);
+        $tagsList = Tag::pluck('name', 'id')->all();
         $articles = Article::orderBy('published_at', 'desc')->paginate(3);
 
-        return view('welcome', compact('articles'));
+        return view('welcome', compact(['articles', 'tagsList']));
     }
 
 
@@ -40,12 +42,8 @@ class IndexController extends Controller
 
     public function store(ArticleRequest $request)
     {
-        //  type="file"  name="image"   имя_папки    имя диска
-        if($request['image']){
-            $path = $request->file('image')->store('uploads', 'public');
-        } else {
-            $path = '';
-        }
+
+        $path = $request['image'] ? $request->file('image')->store('uploads', 'public') : '';
         
         $article = Article::create([
             'title' => $request['title'],
@@ -54,6 +52,8 @@ class IndexController extends Controller
             'user_id' => Auth::user()->id,
             'image' => $path,
         ]);
+
+        $article->tags()->attach($request->input('tags'));
 
         if($article->haveImage()){
             $article->resizeImage();    
@@ -68,9 +68,10 @@ class IndexController extends Controller
     public function show(Article $article)
     {
         //$article = Article::findOrFail($id);
+        $tagsList = Tag::pluck('name', 'id')->all();
         $article->increment('view');
 
-        return view('show', compact('article'));
+        return view('show', compact('article', 'taglist'));
     }
 
 
@@ -96,6 +97,8 @@ class IndexController extends Controller
 
     public function destroy(Article $article)
     {
+
+        $article->deleteImage();
         $article->delete();
         return redirect('/articles');
     }

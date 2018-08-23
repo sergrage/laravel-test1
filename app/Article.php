@@ -10,16 +10,17 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 use App\User;
 
+
 class Article extends Model
 {
 
    // use Sluggable;
 
+    
 
     protected $fillable = ['title', 'body', 'published_at', 'user_id', 'image'];
 
-// Чтобы своя дата 'published_at' работала как экземпляр Carbon.
-    protected $dates = ['published_at'];
+    protected $dates = ['published_at']; // Чтобы своя дата 'published_at' работала как экземпляр Carbon.
 
     // public function sluggable()
     // {
@@ -41,6 +42,11 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
+
     public function limit()
     {
         return str_limit($this->body, 50, '...');
@@ -48,25 +54,29 @@ class Article extends Model
 
     public function haveImage()
     {
-        if(!$this->image){
-            return false;
-        }
+        return $this->image ?  true : false;
+    }
 
-        return true;
+    public function imagePath()
+    {
+        return $this->image ? 'storage/' . $this->image : '';
     }
 
     public function resizeImage()
     {
-        
         // open and resize an image file
-        $img = Image::make('storage/' . $this->image);
+        $img = Image::make($this->imagePath());
 
         $img->resize(540, null, function ($constraint) {
              $constraint->aspectRatio();
         });
 
         // save file as jpg with medium quality
-        $img->save('storage/' . $this->image, 60);
+        $img->save($this->imagePath(), 60);
+    }
 
+    public function deleteImage()
+    {
+        $this->haveImage() ? unlink($this->imagePath()) : '';
     }
 }

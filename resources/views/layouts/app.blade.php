@@ -9,10 +9,10 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Laravel</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 
 
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        
 
         <!-- Fonts -->
         <!-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css"> -->
@@ -26,17 +26,17 @@
                 background-color: #fff;
                 color:  black;
                 font-family: 'Raleway', sans-serif;
-                font-weight: 400;
+                font-weight: 400;       
                 height: 100vh;
                 margin: 0;
-            }
+            }       
             .full-height {
                 height: 100vh;
             }
-            .flex-center {
+            .flex-center {       
                 align-items: center;
                 display: flex;
-                justify-content: center;
+                justify-content: center;       
             }
             .position-ref {
                 position: relative;
@@ -44,9 +44,9 @@
             .top-right {
                 position: absolute;
                 right: 10px;
-                top: 18px;
+                top: 18px;       
             }
-            .content {
+            .content {       
                 text-align: center;
             }
             .title {
@@ -55,7 +55,7 @@
                 font-weight: 300;
             }
             .links > a {
-                padding: 0 25px;
+                padding: 0 25px;       
                 font-size: 12px;
                 font-weight: 600;
                 letter-spacing: .1rem;
@@ -84,8 +84,16 @@
             </div>
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+        <!-- Scripts -->
+
         <script>
-            $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
+            $('.js-example-basic-multiple').select2({
+                placeholder: "Choose a tag",
+                tags: true
+
+            });
         </script>
     </body>
 </html>

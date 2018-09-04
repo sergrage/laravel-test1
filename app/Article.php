@@ -79,4 +79,9 @@ class Article extends Model
     {
         $this->haveImage() ? unlink($this->imagePath()) : '';
     }
+
+    public function getTagListAttribute()
+    {
+        return $this->tags->pluck('id');
+    }
 }

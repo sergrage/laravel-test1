@@ -8,13 +8,14 @@
 </div>
 <div class="form-group">
 	{!! Form::label('tags', 'Tags:') !!}
-	{!! Form::select('tags[]', $tagsList, null, ['class' => 'form-control', 'multiple']) !!}
+	{!! Form::select('tags[]', $tagsList, null , ['class' => 'form-control js-example-basic-multiple', 'multiple']) !!}
 </div>
+
+<!-- имя выбранного элемента, значение по умолчанию (это список всех тегов), выбранный элемент списка -->
+
 <div class="form-group">
     {!! Form::file('image') !!}
 </div>
 <div class="form-group">
     {!! Form::submit($submitBtn, ['class' => 'btn btn-primary']) !!}
 </div>
-
-

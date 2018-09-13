@@ -33,18 +33,18 @@
                 <img class="img-fluid pb-lg-5" src="{{ asset('/storage/' . $article->image) }}" alt="">
                 @endisset
                 <p>  {!! $article->body !!} </p>
-                <p> Published  <span class="badge badge-light">{{ $article->publishedAtForHumans() }}</span> by <span class="badge badge-info"> {{ $article->user->name }} </span></p>
+                <p> Published  <span class="badge badge-light">{{ $article->publishedAtForHumans() }}</span> by <a class="badge badge-info" href="{{route('author.search',  $article->user->name)}}"> {{ $article->user->name }} </a></p>
                 <p>View: <span> {{ $article->view }} </span></p>
-                <a href=" {{action ('IndexController@show', [$article->id])}} " class="btn btn-info">Show</a>
-                <a href=" {{action ('IndexController@edit', [$article->id])}} " class="btn btn-warning">Edit</a>
+                <a href=" {{action ('IndexController@show', [$article->id])}} " class="btn btn-sm btn-info">Show</a>
+                <a href=" {{action ('IndexController@edit', [$article->id])}} " class="btn btn-sm btn-warning">Edit</a>
 
                 {!! Form::model($article, ['method' => 'DELETE','files' => true, 'action' => ['IndexController@destroy', $article->id], 'class' => 'd-inline']) !!}
-                {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
+                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
                 {!! Form::close() !!}
 
                 <div>
                     @forelse($article->tags as $tag)
-                    <span class="badge badge-secondary">{{ $tag->name }}</span>
+                    <a class="badge badge-secondary" href="{{ route('tag.search', $tag->name)}}">{{ $tag->name }}</a>
                     @empty
                         <span class="badge badge-secondary">No tags for this article</span>
                     @endforelse
